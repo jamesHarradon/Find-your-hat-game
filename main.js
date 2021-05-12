@@ -14,8 +14,7 @@ let isEndOfGame = false;
 let moveCounter = 0; // to change psn of hat after every 10 moves.
 let startTime;
 let endTime;
-let h;
-let w;
+
 
 //how to make the game better ;
 // - 
@@ -91,6 +90,8 @@ class Field {
         //
 
     }
+    
+    
 
 
     print() {
@@ -213,9 +214,9 @@ class Field {
         let playAgainDecisionMade = false;
 
         while(!playAgainDecisionMade) {
-        let playAgain = prompt(`${name} thanks for playing, would you like to play again? Please type either y or n.`);
+        let playAgain = prompt(`${name} thanks for playing, would you like to play again? Please type either y or n :`);
         if(playAgain === "y") {
-            playGame();
+            Field.playGame();
             playAgainDecisionMade = true;
         } else if (playAgain === "n"){
             playAgainDecisionMade = true;
@@ -223,45 +224,49 @@ class Field {
         } 
         }
     }
-}
 
-function playGame() {
+    static playGame() {
     
-    isEndOfGame = false;
-    let name = prompt("Hi What is your name? :");
-    w = prompt(`${name}, please type the width you'd like you game area to be.`);
-    h = prompt(`Now please type the height.`);
-    const myField = new Field(Field.generateField(w, h, 20));
-    myField.print();
-    console.log(`Hi ${name}, lets play Find Your Hat!`);
-    let hardMode = prompt(`${name}, would you like to play hard mode? Please type either y or n`)
-    console.log(`Move the * to find the ^ avoiding the O's, and stay in the game area! The quicker you find your hat, the more points you get....GO!`);
-    myField.getMyTime("start");
-    while(!isEndOfGame) {
-        myField.move()
-        myField.assessMove()
-        if (hardMode === "y") {
-            if(moveCounter % Math.ceil(Math.random()*10) === 0) {
-                myField.randomiseHat(myField.arr.length, myField.arr[0].length);
+        isEndOfGame = false;
+        let name = prompt("Hi What is your name? :");
+        // w = prompt(`${name}, please type the width you'd like you game area to be :`);
+        // h = prompt(`Now please type the height :`);
+        const myField = new Field(Field.generateField(20, 20, 20));
+        myField.print();
+        console.log(`Hi ${name}, lets play Find Your Hat!`);
+        let hardMode = prompt(`${name}, would you like to play hard mode? Please type either y or n :`)
+        console.log(`Move the * to find the ^ avoiding the O's, and stay in the game area! The quicker you find your hat, the more points you get....GO!`);
+        myField.getMyTime("start");
+        while(!isEndOfGame) {
+            myField.move()
+            myField.assessMove()
+            if (hardMode === "y") {
+                if(moveCounter % Math.ceil(Math.random()*10) === 0) {
+                    myField.randomiseHat(myField.arr.length, myField.arr[0].length);
+                }
+            } else if(hardMode === "n") {
+                if(moveCounter % 10 === 0) {
+                    myField.randomiseHat(myField.arr.length, myField.arr[0].length);
+                }
             }
-        } else if(hardMode === "n") {
-            if(moveCounter % 10 === 0) {
-                myField.randomiseHat(myField.arr.length, myField.arr[0].length);
+            
+            if(!isEndOfGame) {
+                myField.print();
             }
         }
-        
-        if(!isEndOfGame) {
-            myField.print();
-        }
+    
+        setTimeout(function(){myField.playAgain(name)}, 2000); // something i found out, when using setTimeout with a function, the function you want to run, in this case playAgain() has to go inside another function!
+        //setTimeout(this.playAgain.bind(this,[name]), 2000) IMPORTANT - this is an example of using this inside a timeout function with bind.
+    
     }
 
-    setTimeout(function(){myField.playAgain(name)}, 2000); // something i found out, when using setTimeout with a function, the function you want to run, in this case playAgain() has to go inside another function!
     
-
 }
 
 
 
 
-playGame();
+
+
+Field.playGame();
 
