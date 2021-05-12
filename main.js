@@ -58,7 +58,7 @@ class Field {
         // puts hat at top left of grid
         arr[0][0] = pathCharacter;
 
-        // randomises location of hat-
+        // randomises location of hat
         arr[randomise(height)][randomise(width)] = hat;
         
 
@@ -91,8 +91,6 @@ class Field {
 
     }
     
-    
-
 
     print() {
         // prints array as a string to the console, this will need to be done after each move.
@@ -119,8 +117,8 @@ class Field {
                 validDir = true;
                 
             } else if (dir === "r") {
-                this.column +=1;
-                validDir = true;
+                    this.column +=1;
+                    validDir = true;
                 
             } else if(dir ==="u") {
                 this.row -=1;
@@ -241,10 +239,12 @@ class Field {
             myField.move()
             myField.assessMove()
             if (hardMode === "y") {
+                // moves psn of hat if moveCounter % random num out of 10 equals 0;
                 if(moveCounter % Math.ceil(Math.random()*10) === 0) {
                     myField.randomiseHat(myField.arr.length, myField.arr[0].length);
                 }
             } else if(hardMode === "n") {
+                // moves psn of hat every 10 moves
                 if(moveCounter % 10 === 0) {
                     myField.randomiseHat(myField.arr.length, myField.arr[0].length);
                 }
