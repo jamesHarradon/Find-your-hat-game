@@ -225,7 +225,7 @@ class Field {
     }
 
     static playGame() {
-    
+        moveCounter = 0;
         isEndOfGame = false;
         let name = prompt("Hi What is your name? :");
         // w = prompt(`${name}, please type the width you'd like you game area to be :`);
