@@ -94,6 +94,7 @@ class Field {
 
     print() {
         // prints array as a string to the console, this will need to be done after each move.
+        process.stdout.write('\x1Bc');//clears the console before each print
         this.arr.forEach(row => {
             console.log(row.join(""));
         })
