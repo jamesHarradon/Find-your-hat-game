@@ -36,11 +36,9 @@ class Field {
         
         // ive read that you should avoid using new Array. let arr = new Array(10, 20, 30) would create a new array filled with those values, however using just one value eg 10, will produce an array with 10 empty elements. This can help us in this case.
         let arr = new Array(height).fill(0).map(el => new Array(width));//was struggling with this so this line copied from codecademy. solution
-        //randomise function
         const randomise = (num) => {
             return Math.floor(Math.random()*num)
         }
-        
         //fills field with fieldCharacters
         for (let i = 0; i < height; i++) {
             for (let j = 0; j < width; j++) {
@@ -48,7 +46,6 @@ class Field {
             }
         }
         // randomly places holes
-        
         let numOfHoles = (width * height)/100 * percOfHoles;
         while(numOfHoles > 0) {
             arr[randomise(height)][randomise(width)] = hole;
@@ -56,14 +53,10 @@ class Field {
         } 
         // puts hat at top left of grid
         arr[0][0] = pathCharacter;
-
         // randomises location of hat
         arr[randomise(height)][randomise(width)] = hat;
-        
-
-        
+    
         return arr;
-        
     }
 
     randomiseHat(height, width) {
@@ -80,15 +73,14 @@ class Field {
     }
 
     fieldValidator() {
-        //tests whether field can be solved
+    
+        //tests whether field can be solved - something to come back to
         //IDEAS
         // 1 - produce all co-ordinates of holes - no go area
         // 2 - produce all co-ordinates of outofbounds - no go area
         // 3 - give co-ordinates of hat
         // 4 - move into empty field space If(arr[i][j] === 'field character'); generated arr[i][j] will have to be within ONE move of the current psn.
-        // 5 - record own trail as no go area
-        //
-
+        // 5 - record own trail as no go area 
     }
     
 
@@ -109,7 +101,6 @@ class Field {
     move() {
         //changes row and column coordinates 
         let validDir = false;
-
         while(!validDir){
             let dir = prompt(`Which way do you want to move? Please type either l, r, u or d :`);
         
@@ -136,9 +127,6 @@ class Field {
 
         }
         
-        
-
-
         // the below is for using the arrow keys to move but it isnt working atm.
         // process.stdin.on("keypress", keyListener);
     
@@ -168,25 +156,21 @@ class Field {
     }
 
     assessMove() {
-    
         //if pathCharacter goes out of game area, game is over.
         if(this.column < 0 ||this.column > this.arr[0].length -1 || this.row < 0 || this.row > this.arr.length -1)  {
             isEndOfGame = true;
             console.log("You have moved out of the game area - GAME OVER!");
         }
-        
         // if pathCharacter encounters another pathCharacter(its own trail) it cannot move
         else if(this.getPosition() === pathCharacter) {
             isEndOfGame = true;
             console.log("You have hit your own trail - GAME OVER!");
         }
-
         //if pathCharacter encounters a O, console.log("You fell down a hole, unlucky")
         else if(this.getPosition() === hole) {
             isEndOfGame = true;
             console.log("You have fallen down a hole - GAME OVER!");
         }
-
         //if pathCharacter finds the ^, console.log("You found your hat, well done! You completed the game")
         else if (this.getPosition() === hat) {
             isEndOfGame = true;
@@ -211,7 +195,6 @@ class Field {
 
     playAgain(name) {
         let playAgainDecisionMade = false;
-
         while(!playAgainDecisionMade) {
         let playAgain = prompt(`${name} thanks for playing, would you like to play again? Please type either y or n :`);
         if(playAgain === "y") {
@@ -250,7 +233,6 @@ class Field {
                     myField.randomiseHat(myField.arr.length, myField.arr[0].length);
                 }
             }
-            
             if(!isEndOfGame) {
                 myField.print();
             }
@@ -258,10 +240,7 @@ class Field {
     
         setTimeout(function(){myField.playAgain(name)}, 2000); // something i found out, when using setTimeout with a function, the function you want to run, in this case playAgain() has to go inside another function!
         //setTimeout(this.playAgain.bind(this,[name]), 2000) IMPORTANT - this is an example of using this inside a timeout function with bind.
-    
-    }
-
-    
+    }   
 }
 
 Field.playGame();
