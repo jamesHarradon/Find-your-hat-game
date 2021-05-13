@@ -33,10 +33,9 @@ class Field {
         this.column = 0;  
     }
     static generateField(width, height, percOfHoles) {
-        // was really struggling creating this 2d array, code below copied from codecademy solution, creates a 2d array with height x rows and width x columns.
         
         // ive read that you should avoid using new Array. let arr = new Array(10, 20, 30) would create a new array filled with those values, however using just one value eg 10, will produce an array with 10 empty elements. This can help us in this case.
-        let arr = new Array(height).fill(0).map(el => new Array(width));
+        let arr = new Array(height).fill(0).map(el => new Array(width));//was struggling with this so this line copied from codecademy. solution
         //randomise function
         const randomise = (num) => {
             return Math.floor(Math.random()*num)
@@ -62,7 +61,7 @@ class Field {
         arr[randomise(height)][randomise(width)] = hat;
         
 
-        //the below code in the print() method doesnt seem to work, i think it is because the method cannot access the arr variable
+        
         return arr;
         
     }
@@ -76,12 +75,13 @@ class Field {
                 }
             }
         }
-        this.arr[Math.floor(Math.random()*height)][Math.floor(Math.random()*width)] = hat;
+        
+        this.arr[Math.floor(Math.random()*height)][Math.floor(Math.random()*width)] = hat;//could have made randomise() a method
     }
 
     fieldValidator() {
         //tests whether field can be solved
-
+        //IDEAS
         // 1 - produce all co-ordinates of holes - no go area
         // 2 - produce all co-ordinates of outofbounds - no go area
         // 3 - give co-ordinates of hat
@@ -106,7 +106,7 @@ class Field {
 
 
     move() {
-        
+        //changes row and column coordinates 
         let validDir = false;
 
         while(!validDir){
@@ -262,11 +262,6 @@ class Field {
 
     
 }
-
-
-
-
-
 
 Field.playGame();
 
