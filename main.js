@@ -175,9 +175,10 @@ class Field {
         moveCounter = 0;
         isEndOfGame = false;
         let name = prompt("Hi What is your name? :");
-        // w = prompt(`${name}, please type the width you'd like you game area to be :`);
-        // h = prompt(`Now please type the height :`);
-        const myField = new Field(Field.generateField(20, 20, 20));
+        let w = parseInt(prompt(`${name}, please type the width you'd like you game area to be :`));
+        let h = parseInt(prompt(`Now please type the height :`));
+        let ph = parseInt(prompt(`What % of the field would you like covered in holes?`));
+        const myField = new Field(Field.generateField(w, h, ph));
         myField.print();
         console.log(`Hi ${name}, lets play Find Your Hat!`);
         let hardMode = prompt(`${name}, would you like to play hard mode? Please type either y or n :`)
