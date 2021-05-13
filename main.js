@@ -1,11 +1,5 @@
 const prompt = require('prompt-sync')({sigint: true});
 
-// const EventEmitter = require("events");
-// const emitter = new EventEmitter;
-
-// const keypress = require("keypress");
-// keypress(process.stdin);
-
 const hat = '^';
 const hole = 'O';
 const fieldCharacter = '░';
@@ -17,14 +11,13 @@ let endTime;
 
 
 //how to make the game better ;
-// - 
-// - 
+// - use arrows instead of letters to move
+
 //  codecademy ideas ;
 // - 
 // - add more holes after a certain time
 // - improve your games graphics??
 // - create a field validator to check whether the game can actually be solved.
-
 
 class Field {
     constructor(arr = [[]]) {
@@ -33,7 +26,6 @@ class Field {
         this.column = 0;  
     }
     static generateField(width, height, percOfHoles) {
-        
         // ive read that you should avoid using new Array. let arr = new Array(10, 20, 30) would create a new array filled with those values, however using just one value eg 10, will produce an array with 10 empty elements. This can help us in this case.
         let arr = new Array(height).fill(0).map(el => new Array(width));//was struggling with this so this line copied from codecademy. solution
         const randomise = (num) => {
@@ -51,7 +43,7 @@ class Field {
             arr[randomise(height)][randomise(width)] = hole;
             numOfHoles--;
         } 
-        // puts hat at top left of grid
+        // puts pathCharacter at top left of grid
         arr[0][0] = pathCharacter;
         // randomises location of hat
         arr[randomise(height)][randomise(width)] = hat;
@@ -124,35 +116,7 @@ class Field {
                 // this msg doesnt show as it goes straight to the prompt
                 "Please enter a valid direction!";
             }
-
         }
-        
-        // the below is for using the arrow keys to move but it isnt working atm.
-        // process.stdin.on("keypress", keyListener);
-    
-        // const keyListener = (e) => {
-        //     return e.keyCode;
-        // }
-        // //changes psn of fieldCharacter using arrow keys.
-        // // ensures user cannot move outside area.
-        
-        // switch(keyListener) {
-        //     case 37: this.row -= 1;
-        //              break;
-            
-        //     case 38: this.column -= 1;
-        //              break;
-
-        //     case 39: this.row += 1;
-        //              break;
-
-        //     case 40: this.column += 1;
-        //              break;
-        
-        //     default:
-        //     return;
-        // }
-        
     }
 
     assessMove() {
