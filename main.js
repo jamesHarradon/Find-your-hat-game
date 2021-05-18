@@ -203,7 +203,7 @@ class Field {
             }
         }
     
-        setTimeout(function(){myField.playAgain(name)}, 2000); // something i found out, when using setTimeout with a function, the function you want to run, in this case playAgain() has to go inside another function!
+        setTimeout(myField.playAgain, 2000, name); // when using setTimeout with a function that takes a parameter, the parameter goes as the third argument after the time delay.
         //setTimeout(this.playAgain.bind(this,[name]), 2000) IMPORTANT - this is an example of using this inside a timeout function with bind.
     }   
 }
